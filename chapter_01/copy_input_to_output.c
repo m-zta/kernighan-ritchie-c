@@ -5,7 +5,7 @@ int main() {
 
     printf("This is the echo program. Type anything, it will be repeated!\n");
 
-    while ((ch = getchar()) != EOF && ch != '\n') {
+    while ((ch = getchar()) != EOF) {
         putchar(ch);
     }
 
