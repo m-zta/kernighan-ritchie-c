@@ -1,29 +1,40 @@
 #include <stdio.h>
 
-#define IN 1 // inside a word
+#define IN 1  // inside a word
 #define OUT 0 // outside a word
 
 int main() {
-    int ch, new_line, new_word, new_char, state;
+    int last_char, line_count, word_count, char_count, state;
 
-    state = OUT;
-    new_line = new_word = new_char = 0;
+    state      = OUT;
+    line_count = word_count = char_count = 0;
 
-    while ((ch = getchar()) != EOF) {
-        ++new_char;
+    printf("Type any text, I count characters, words and lines!\n");
 
-        if (ch == '\n') {
-            ++new_line;
+    while ((last_char = getchar()) != EOF) {
+        if (!(last_char == ' ' || last_char == '\t' || last_char == '\n')) {
+            char_count++;
+            if (state == OUT) {
+                word_count++;
+                state = IN;
+            }
+        } else {
+            state = OUT;
         }
 
-        if (ch == ' ' || ch == '\n' || ch == '\t') {
-            state = OUT;
-        } else if (state == OUT) {
-            state = IN;
-            ++new_word;
+        if (last_char == '\n') {
+            line_count++;
         }
     }
 
-    printf("-----------------\n");
-    printf("Lines:%d\nWords: %d\nCharacters: %d\n", new_line, new_word, new_char);
+    if (char_count > 0 && last_char != '\n' && last_char != EOF) {
+        printf("Last character: ");
+        putchar(last_char);
+        printf("\n");
+        line_count++;
+    }
+
+    printf("\n-----------------\n");
+    printf("Lines: %d\nWords: %d\nCharacters: %d\n", line_count, word_count,
+           char_count);
 }
