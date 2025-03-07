@@ -1,15 +1,10 @@
 #include <stdio.h>
 
 int main() {
-    int ch, blank_count, other_count;
-
-    int digit_count[10];
-
-    blank_count = other_count = 0;
-
-    for (int i = 0; i < 10; i++) {
-        digit_count[i] = 0;
-    }
+    int          ch;
+    unsigned int blank_count     = 0;
+    unsigned int other_count     = 0;
+    unsigned int digit_count[10] = {0};
 
     printf("Count blanks (' ', '\\t', '\\n'), digits (0-9) and other "
            "characters:\n");
